@@ -4,14 +4,19 @@ import MoonstoneDecorator from '@enact/moonstone/MoonstoneDecorator';
 import {Routable, Route, Panels} from '@enact/moonstone/Panels';
 import {Cell} from '@enact/ui/Layout';
 import {SlideLeftArranger} from '@enact/ui/ViewManager';
+import {Column} from '@enact/ui/Layout';
 
-import {Search} from '../Views/Search/Search';
-import {Main} from '../Views/Main/Main';
-import {LastSeen} from '../Views/LastSeen/LastSeen';
-import {Player} from '../Views/Player/Player';
-import {Profile} from '../Views/Profile/Profile';
-import {WrapperRow, WrapperCell} from './AppStyles';
+import {Search} from '../Pages/Search/Search';
+import {Main} from '../Pages/Main/Main';
+import {LastSeen} from '../Pages/LastSeen/LastSeen';
+import {Player} from '../Pages/Player/Player';
+import {Profile} from '../Pages/Profile/Profile';
+import {Channels} from '../Pages/Channels/Channels';
+
+import {WrapperRow, WrapperCell, WrapperCellHeader} from './AppStyles';
 import {Routes} from '../Views/Routes/Routes';
+import {setRoute, setShowMenu} from '../../modules/routes/routes.actions';
+import {HeaderWrapper} from '../Views/Header/Header';
 
 const RoutablePanels = Routable({navigate: 'onBack'}, Panels);
 
@@ -20,33 +25,39 @@ interface IStateProps {
   showMenu: boolean;
 }
 
-interface IProps extends IStateProps{}
+interface IDispatchProps {
+  setShowMenu: typeof setShowMenu;
+  setRoute: typeof setRoute;
+}
+
+interface IProps extends IStateProps, IDispatchProps {
+}
 
 class AppComponent extends React.PureComponent<IProps> {
-  onNavigate() {
-    this.setState({path: 'main'});
-  }
-
-  state = {
-    path: '/main',
-  };
-
   render() {
-    const {route, showMenu} = this.props;
+    const {route, showMenu, setShowMenu, setRoute} = this.props;
 
     return (
-      <WrapperRow >
-        <WrapperCell size="10%" display={showMenu ? 'block' : 'none'}>
-          <Routes />
+      <WrapperRow>
+        <WrapperCell size="15%" display={showMenu ? 'block' : 'none'}>
+          <Routes/>
         </WrapperCell>
         <Cell>
-          <RoutablePanels arranger={SlideLeftArranger} onBack={this.onNavigate} path={route} noCloseButton={true}>
-            <Route path="main" component={Main}/>
-            <Route path="search" component={Search}/>
-            <Route path="lastSeen" component={LastSeen}/>
-            <Route path="player" component={Player}/>
-            <Route path="profile" component={Profile}/>
-          </RoutablePanels>
+          <Column>
+            <WrapperCellHeader size={90} component="header" display={showMenu ? 'block' : 'none'}>
+              <HeaderWrapper route={route}/>
+            </WrapperCellHeader>
+            <Cell>
+              <RoutablePanels arranger={SlideLeftArranger} onBack={setRoute} path={route} noCloseButton={true}>
+                <Route path="main" component={Main}/>
+                <Route path="search" component={Search}/>
+                <Route path="lastSeen" component={LastSeen}/>
+                <Route path="player" component={Player} setShowMenu={setShowMenu}/>
+                <Route path="profile" component={Profile}/>
+                <Route path="channels" component={Channels}/>
+              </RoutablePanels>
+            </Cell>
+          </Column>
         </Cell>
       </WrapperRow>
     );
@@ -58,4 +69,9 @@ const mapStateToProps = ({routesReducer: {route, showMenu}}): IStateProps => ({
   showMenu,
 });
 
-export const App = MoonstoneDecorator(connect(mapStateToProps)(AppComponent));
+const mapDispatchToProps: IDispatchProps = {
+  setShowMenu,
+  setRoute,
+};
+
+export const App = MoonstoneDecorator(connect(mapStateToProps, mapDispatchToProps)(AppComponent));

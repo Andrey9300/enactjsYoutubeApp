@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Item} from '@enact/ui/Item';
 import MoonstoneDecorator from '@enact/moonstone/MoonstoneDecorator';
+import Group from '@enact/ui/Group';
+import SelectableItem from '@enact/moonstone/SelectableItem';
 
 import {setRoute} from '../../../modules/routes/routes.actions';
 
@@ -11,49 +12,60 @@ export enum EPathNames {
   LAST_SEEN = 'Просмотренные',
   PLAYER = 'Плеер',
   PROFILE = 'Профиль',
+  CHANNELS = 'Каналы',
 }
 
 interface IDispatchProps {
   setRoute: typeof setRoute;
 }
 
-interface IProps extends IDispatchProps {}
+interface IProps extends IDispatchProps {
+}
 
 class RoutesComponent extends React.PureComponent<IProps> {
-  private setMain = () => {
-    const {setRoute} = this.props;
-    setRoute('/main');
-  };
+  private routes = [EPathNames.MAIN, EPathNames.SEARCH, EPathNames.LAST_SEEN, EPathNames.PLAYER, EPathNames.PROFILE, EPathNames.CHANNELS];
 
-  private setSearch = () => {
+  private changeRoute = (event) => {
     const {setRoute} = this.props;
-    setRoute('/search');
-  };
 
-  private setLastSeen = () => {
-    const {setRoute} = this.props;
-    setRoute('/lastSeen');
-  };
+    if (!event || !event.data) {
+      return;
+    }
 
-  private setProfile = () => {
-    const {setRoute} = this.props;
-    setRoute('/profile');
-  };
+    const {data} = event;
 
-  private setPlayer = () => {
-    const {setRoute} = this.props;
-    setRoute('/player');
+    switch (data) {
+      case EPathNames.MAIN:
+        setRoute('main');
+        break;
+      case EPathNames.SEARCH:
+        setRoute('search');
+        break;
+      case EPathNames.LAST_SEEN:
+        setRoute('lastSeen');
+        break;
+      case EPathNames.PLAYER:
+        setRoute('player');
+        break;
+      case EPathNames.PROFILE:
+        setRoute('profile');
+        break;
+      case EPathNames.CHANNELS:
+        setRoute('channels');
+        break;
+    }
   };
 
   render() {
     return (
-      <>
-        <Item onClick={this.setMain}>{EPathNames.MAIN}</Item>
-        <Item onClick={this.setSearch}>{EPathNames.SEARCH}</Item>
-        <Item onClick={this.setLastSeen}>{EPathNames.LAST_SEEN}</Item>
-        <Item onClick={this.setProfile}>{EPathNames.PROFILE}</Item>
-        <Item onClick={this.setPlayer}>{EPathNames.PLAYER}</Item>
-      </>
+      <Group
+        childComponent={SelectableItem}
+        selectedProp="selected"
+        onSelect={this.changeRoute}
+        select="radio"
+      >
+        {this.routes}
+      </Group>
     );
   }
 }

@@ -10,7 +10,7 @@ export interface IRoutesStore {
 }
 
 export const route: Reducer<string, TRoutesAction> = (
-  state = 'main',
+  state = 'channels', // поменять
   action,
 ) => {
   switch (action.type) {
@@ -27,7 +27,7 @@ export const showMenu: Reducer<boolean, AnyAction> = (
   action,
 ) => {
   switch (action.type) {
-    case ERoutes.SHOW_MENU: {
+    case ERoutes.SET_SHOW_MENU: {
       return action.payload;
     }
     default:

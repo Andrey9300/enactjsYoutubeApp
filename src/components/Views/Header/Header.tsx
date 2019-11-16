@@ -3,15 +3,34 @@ import kind from '@enact/core/kind';
 import {Header} from '@enact/moonstone/Panels';
 
 import {LogoWithTitle} from '../../Icons/LogoWithTitle/LogoWithTitle';
+import {EPathNames} from '../Routes/Routes';
 
 interface IProps {
-  title: string;
+  route: string;
 }
 
 export const HeaderWrapper = kind<IProps>({
-  render: ({title}) => (
-    <Header title={title} type="compact" >
-      <LogoWithTitle />
-    </Header>
-  ),
+  render: ({route}) => {
+    let title = EPathNames.MAIN;
+
+    switch (route) {
+      case 'search':
+        title = EPathNames.SEARCH;
+        break;
+      case 'lastSeen':
+        title = EPathNames.LAST_SEEN;
+        break;
+      case 'profile':
+        title = EPathNames.PROFILE;
+      case 'channels':
+        title = EPathNames.CHANNELS;
+        break;
+    }
+
+    return (
+      <Header title={title} type="compact">
+        <LogoWithTitle/>
+      </Header>
+    );
+  },
 });

@@ -1,13 +1,15 @@
 import {ERoutes} from './routes.constants';
 
-export const setRoute = (payload: string) =>
+export type TRoutes = 'main' | 'search' | 'lastSeen' | 'player' | 'profile' | 'channels';
+
+export const setRoute = (payload: TRoutes) =>
   ({
     type: ERoutes.SET_ROUTE,
     payload,
   } as const);
 
-export const showMenu = (payload: boolean) =>
+export const setShowMenu = (payload: boolean) =>
   ({
-    type: ERoutes.SHOW_MENU,
+    type: ERoutes.SET_SHOW_MENU,
     payload,
   } as const);

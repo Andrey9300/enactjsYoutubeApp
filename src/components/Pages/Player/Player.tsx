@@ -7,6 +7,7 @@ import {IVideo} from '../../../interfaces/IVideo';
 
 interface IProps {
   item: IVideo;
+  setShowMenu: (show: boolean) => void;
 }
 
 export class Player extends React.PureComponent<IProps> {
@@ -19,7 +20,9 @@ export class Player extends React.PureComponent<IProps> {
   };
 
   componentDidMount(): void {
-    console.log('testMount');
+    const {setShowMenu} = this.props;
+
+    setShowMenu(false);
   }
 
   componentDidUpdate(prevProps, prevState) {

@@ -15,3 +15,9 @@ export const WrapperCell = styled(Cell)<{
   margin-top: 4rem;
   margin-left: 1rem;
 `;
+
+export const WrapperCellHeader = styled(Cell)<{
+  display: string;
+}>`
+  display: ${({display}) => display};
+`;

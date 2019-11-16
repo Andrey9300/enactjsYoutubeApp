@@ -2,8 +2,9 @@ declare module '@enact/spotlight';
 
 declare module '@enact/moonstone/VideoPlayer';
 declare module '@enact/moonstone/Panels';
-declare module '@enact/moonstone/VirtualList';
+declare module '@enact/moonstone/Scroller';
 
+declare module '@enact/moonstone/VirtualList';
 declare module '@enact/ui/Group';
 declare module '@enact/ui/Layout';
 
