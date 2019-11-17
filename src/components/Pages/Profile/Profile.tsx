@@ -10,5 +10,5 @@ export const Profile = kind<IProps>({
     <Panel>
       <BodyText>Профиль</BodyText>
     </Panel>
-  )
+  ),
 });

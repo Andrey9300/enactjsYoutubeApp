@@ -52,11 +52,16 @@ export class Player extends React.PureComponent<IProps> {
   render() {
     // const {item} = this.props;
     return (
-      <VideoPlayer ref={this.setVideoRef} spotlightDisabled={this.state.panelsVisible} className={'enact-fit'}>
-        <source src={'http://media.w3.org/2010/05/sintel/trailer.mp4'} type="video/mp4"/>
-        <infoComponents>
-          Описание
-        </infoComponents>
+      <VideoPlayer
+        ref={this.setVideoRef}
+        spotlightDisabled={this.state.panelsVisible}
+        className={'enact-fit'}
+      >
+        <source
+          src={'http://media.w3.org/2010/05/sintel/trailer.mp4'}
+          type="video/mp4"
+        />
+        <infoComponents>Описание</infoComponents>
         <MediaControls>
           <rightComponents>
             <IconButton

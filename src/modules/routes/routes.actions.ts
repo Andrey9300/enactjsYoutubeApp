@@ -1,6 +1,12 @@
 import {ERoutes} from './routes.constants';
 
-export type TRoutes = 'main' | 'search' | 'lastSeen' | 'player' | 'profile' | 'channels';
+export type TRoutes =
+  | 'main'
+  | 'search'
+  | 'lastSeen'
+  | 'player'
+  | 'profile'
+  | 'channels';
 
 export const setRoute = (payload: TRoutes) =>
   ({

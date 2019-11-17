@@ -9,7 +9,7 @@ const store = configureStore();
 store.runSaga(rootSaga);
 
 export const AppElement = () => (
-	<Provider store={store}>
-		<App />
-	</Provider>
+  <Provider store={store}>
+    <App />
+  </Provider>
 );

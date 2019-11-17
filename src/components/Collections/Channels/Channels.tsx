@@ -1,6 +1,5 @@
 import React from 'react';
 import BodyText from '@enact/moonstone/BodyText';
-import {Panel} from '@enact/moonstone/Panels';
 import Scroller from '@enact/moonstone/Scroller';
 import {add, is} from '@enact/core/keymap';
 
@@ -42,23 +41,21 @@ export class CollectionChannels extends React.PureComponent<IProps> {
   };
 
   render() {
-
     return (
-      <Panel onKeyDown={this.handleKeyDown}>
-        <Scroller
-          direction="vertical"
-          verticalScrollbar="hidden"
-          style={{height: `100%`}}
-          cbScrollTo={this.getScrollTo}
-        >
-          <BodyText>Каналы</BodyText>
-          <Playlist id="1" items={getMockVideoInfoCollection(30)}/>
-          <BodyText>Каналы 2</BodyText>
-          <Playlist id="2" items={getMockVideoInfoCollection(30)}/>
-          <BodyText>Каналы 3</BodyText>
-          <Playlist id="3" items={getMockVideoInfoCollection(30)}/>
-        </Scroller>
-      </Panel>
+      <Scroller
+        direction="vertical"
+        verticalScrollbar="hidden"
+        style={{height: `100%`}}
+        cbScrollTo={this.getScrollTo}
+        onKeyDown={this.handleKeyDown}
+      >
+        <BodyText>Каналы</BodyText>
+        <Playlist id="1" items={getMockVideoInfoCollection(30)} />
+        <BodyText>Каналы 2</BodyText>
+        <Playlist id="2" items={getMockVideoInfoCollection(30)} />
+        <BodyText>Каналы 3</BodyText>
+        <Playlist id="3" items={getMockVideoInfoCollection(30)} />
+      </Scroller>
     );
   }
-};
+}

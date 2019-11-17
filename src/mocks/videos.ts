@@ -4,13 +4,16 @@ const videos = [
     title: 'Sintel',
     poster: 'http://media.w3.org/2010/05/sintel/poster.png',
     source: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
-    desc: 'The film follows a girl named Sintel who is searching for a baby dragon she calls Scales. A flashback reveals that Sintel found Scales with its wing injured and helped care for it, forming a close bond with it.',
+    desc:
+      'The film follows a girl named Sintel who is searching for a baby dragon she calls Scales. A flashback reveals that Sintel found Scales with its wing injured and helped care for it, forming a close bond with it.',
   },
   {
     title: 'Big Buck Bunny',
     poster: 'http://media.w3.org/2010/05/bunny/poster.png',
-    source: 'http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_h264.mov',
-    desc: '\'Big\' Buck wakes up in his rabbit hole, only to be pestered by three critters, Gimera, Frank and Rinky. When Gimera kills a butterfly, Buck decides on a payback Predator-style.',
+    source:
+      'http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_h264.mov',
+    desc:
+      "'Big' Buck wakes up in his rabbit hole, only to be pestered by three critters, Gimera, Frank and Rinky. When Gimera kills a butterfly, Buck decides on a payback Predator-style.",
   },
   {
     title: 'VideoTest',

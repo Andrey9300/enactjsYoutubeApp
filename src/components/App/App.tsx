@@ -30,8 +30,7 @@ interface IDispatchProps {
   setRoute: typeof setRoute;
 }
 
-interface IProps extends IStateProps, IDispatchProps {
-}
+interface IProps extends IStateProps, IDispatchProps {}
 
 class AppComponent extends React.PureComponent<IProps> {
   render() {
@@ -40,21 +39,34 @@ class AppComponent extends React.PureComponent<IProps> {
     return (
       <WrapperRow>
         <WrapperCell size="15%" display={showMenu ? 'block' : 'none'}>
-          <Routes/>
+          <Routes />
         </WrapperCell>
         <Cell>
           <Column>
-            <WrapperCellHeader size={90} component="header" display={showMenu ? 'block' : 'none'}>
-              <HeaderWrapper route={route}/>
+            <WrapperCellHeader
+              size={90}
+              component="header"
+              display={showMenu ? 'block' : 'none'}
+            >
+              <HeaderWrapper route={route} />
             </WrapperCellHeader>
             <Cell>
-              <RoutablePanels arranger={SlideLeftArranger} onBack={setRoute} path={route} noCloseButton={true}>
-                <Route path="main" component={Main}/>
-                <Route path="search" component={Search}/>
-                <Route path="lastSeen" component={LastSeen}/>
-                <Route path="player" component={Player} setShowMenu={setShowMenu}/>
-                <Route path="profile" component={Profile}/>
-                <Route path="channels" component={Channels}/>
+              <RoutablePanels
+                arranger={SlideLeftArranger}
+                onBack={setRoute}
+                path={route}
+                noCloseButton={true}
+              >
+                <Route path="main" component={Main} />
+                <Route path="search" component={Search} />
+                <Route path="lastSeen" component={LastSeen} />
+                <Route
+                  path="player"
+                  component={Player}
+                  setShowMenu={setShowMenu}
+                />
+                <Route path="profile" component={Profile} />
+                <Route path="channels" component={Channels} />
               </RoutablePanels>
             </Cell>
           </Column>
@@ -74,4 +86,6 @@ const mapDispatchToProps: IDispatchProps = {
   setRoute,
 };
 
-export const App = MoonstoneDecorator(connect(mapStateToProps, mapDispatchToProps)(AppComponent));
+export const App = MoonstoneDecorator(
+  connect(mapStateToProps, mapDispatchToProps)(AppComponent),
+);

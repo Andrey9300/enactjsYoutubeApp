@@ -10,5 +10,5 @@ export const Search = kind<IProps>({
     <Panel>
       <BodyText>Поиск</BodyText>
     </Panel>
-  )
+  ),
 });

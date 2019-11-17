@@ -19,11 +19,17 @@ interface IDispatchProps {
   setRoute: typeof setRoute;
 }
 
-interface IProps extends IDispatchProps {
-}
+interface IProps extends IDispatchProps {}
 
 class RoutesComponent extends React.PureComponent<IProps> {
-  private routes = [EPathNames.MAIN, EPathNames.SEARCH, EPathNames.LAST_SEEN, EPathNames.PLAYER, EPathNames.PROFILE, EPathNames.CHANNELS];
+  private routes = [
+    EPathNames.MAIN,
+    EPathNames.SEARCH,
+    EPathNames.LAST_SEEN,
+    EPathNames.PLAYER,
+    EPathNames.PROFILE,
+    EPathNames.CHANNELS,
+  ];
 
   private changeRoute = (event) => {
     const {setRoute} = this.props;
@@ -74,4 +80,6 @@ const mapDispatchToProps: IDispatchProps = {
   setRoute,
 };
 
-export const Routes = MoonstoneDecorator(connect(null, mapDispatchToProps)(RoutesComponent));
+export const Routes = MoonstoneDecorator(
+  connect(null, mapDispatchToProps)(RoutesComponent),
+);

@@ -7,9 +7,6 @@ function* videoPlaylistStartSagaWatcher(): any {
   yield takeEvery(EPlaylist.VIDEO_PLAYLIST_START, videoPlaylistStartSaga);
 }
 
-
 export function* allPlaylistSagasWatcher(): any {
-  yield all([
-    fork(videoPlaylistStartSagaWatcher),
-  ]);
+  yield all([fork(videoPlaylistStartSagaWatcher)]);
 }

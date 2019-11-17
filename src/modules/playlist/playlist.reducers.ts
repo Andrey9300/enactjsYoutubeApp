@@ -3,10 +3,7 @@ import {combineReducers, Reducer} from 'redux';
 import {IVideo} from '../../interfaces/IVideo';
 import {EPlaylist} from './playlist.constants';
 
-
-export type TPlaylistAction = TypedAction<
-  typeof import('./playlist.actions')
->;
+export type TPlaylistAction = TypedAction<typeof import('./playlist.actions')>;
 
 export interface IPlaylistStore {
   playlist: IVideo[];

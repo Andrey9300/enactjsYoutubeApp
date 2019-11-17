@@ -14,8 +14,8 @@ declare type TypedAction<TActionModule> = {
 
 declare namespace JSX {
   interface IntrinsicElements {
-    infoComponents: any
-    rightComponents: any
+    infoComponents: any;
+    rightComponents: any;
   }
 }
 
@@ -62,7 +62,7 @@ declare module '*.json' {
 
 declare namespace NodeJS {
   interface ProcessEnv {
-    NODE_ENV: 'development' | 'production' | 'test'
+    NODE_ENV: 'development' | 'production' | 'test';
   }
 }
 
@@ -97,12 +97,12 @@ declare module '*.webp' {
 }
 
 declare module '*.css' {
-  const classes: { [key: string]: string };
+  const classes: {[key: string]: string};
   export default classes;
 }
 
 declare module '*.less' {
-  const classes: { [key: string]: string };
+  const classes: {[key: string]: string};
   export default classes;
 }
 

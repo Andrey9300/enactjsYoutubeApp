@@ -29,7 +29,10 @@ export class Playlist extends React.PureComponent<IProps> {
       <GridListImageItem
         {...rest}
         key={index}
-        style={{width: `${ri.scale(widthItem)}px`, height: `${ri.scale(heightItem)}px`}}
+        style={{
+          width: `${ri.scale(widthItem)}px`,
+          height: `${ri.scale(heightItem)}px`,
+        }}
         onClick={this.playVideo}
         caption={getVideoTitle(items[index])}
         source={getPosterSrc(items[index])}

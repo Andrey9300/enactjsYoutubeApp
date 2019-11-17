@@ -9,9 +9,11 @@ export function configureStore(initialState = {}) {
 
   const composeEnhancers = compose;
 
-  const store: any = createStore(rootReducer, initialState, composeEnhancers(
-    applyMiddleware(...middleware),
-  ));
+  const store: any = createStore(
+    rootReducer,
+    initialState,
+    composeEnhancers(applyMiddleware(...middleware)),
+  );
 
   store.runSaga = sagaMiddleware.run;
   store.close = () => store.dispatch(END);

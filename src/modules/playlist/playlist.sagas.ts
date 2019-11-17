@@ -49,10 +49,7 @@ export function* videoPlaylistGetSaga(
     limit,
   };
 
-  const axiosResponse = yield call(
-    videoPlaylistService,
-    paramsForPlaylist,
-  );
+  const axiosResponse = yield call(videoPlaylistService, paramsForPlaylist);
 
   if ('error' in axiosResponse) {
     yield put(playlistError({}));
@@ -60,5 +57,4 @@ export function* videoPlaylistGetSaga(
   }
 
   const {response} = axiosResponse;
-  console.log('resp', response);
-  playlistSuccess}
+}

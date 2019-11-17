@@ -76,7 +76,7 @@ export async function axiosRequest<T = unknown>({
         !response ||
         response.status !== STATUS_OK ||
         !response.data ||
-        (response.data.status !== STATUS_OK)
+        response.data.status !== STATUS_OK
       ) {
         /** TODO: throw a proper error */
         throw new Error('some error');

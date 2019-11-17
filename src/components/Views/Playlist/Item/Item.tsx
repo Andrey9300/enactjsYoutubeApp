@@ -11,8 +11,8 @@ interface IProps {
 export const Item = kind<IProps>({
   render: () => (
     <BodyText>
-      Main pattern illustrates the use of the <code>Routable</code> HOC to navigate a
-      hierarchal tree of <code>Panel</code>s.
+      Main pattern illustrates the use of the <code>Routable</code> HOC to
+      navigate a hierarchal tree of <code>Panel</code>s.
     </BodyText>
   ),
 });

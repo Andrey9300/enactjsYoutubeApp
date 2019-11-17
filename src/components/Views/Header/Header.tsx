@@ -29,7 +29,7 @@ export const HeaderWrapper = kind<IProps>({
 
     return (
       <Header title={title} type="compact">
-        <LogoWithTitle/>
+        <LogoWithTitle />
       </Header>
     );
   },

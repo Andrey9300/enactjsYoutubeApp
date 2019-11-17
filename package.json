@@ -19,6 +19,11 @@
 	"eslintConfig": {
 		"extends": "enact"
 	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "pretty-quick --staged"
+		}
+	},
 	"eslintIgnore": [
 		"node_modules/*",
 		"build/*",
@@ -37,6 +42,7 @@
 		"@types/styled-components": "^4.1.20",
 		"axios": "^0.19.0",
 		"ilib": "^14.4.0",
+		"normalizr": "^3.4.1",
 		"react": "^16.11.0",
 		"react-dom": "^16.11.0",
 		"react-redux": "^7.1.1",
@@ -46,5 +52,10 @@
 		"tslint": "^5.20.0",
 		"tslint-react": "^4.1.0",
 		"typescript": "^3.6.4"
+	},
+	"devDependencies": {
+		"husky": "^3.0.9",
+		"prettier": "1.19.1",
+		"pretty-quick": "^2.0.1"
 	}
 }
