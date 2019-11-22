@@ -1,4 +1,4 @@
-import {IVideo} from '@/interfaces/IVideo';
+import {IVideo} from '../../interfaces/IVideo';
 
 export const getVideoContent = (video: IVideo) => {
   if (!video) {

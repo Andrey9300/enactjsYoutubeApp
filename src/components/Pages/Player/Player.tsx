@@ -4,10 +4,12 @@ import IconButton from '@enact/moonstone/IconButton';
 import Spotlight from '@enact/spotlight';
 
 import {IVideo} from '../../../interfaces/IVideo';
+import {PlayerService} from '../../../services/playerService';
 
 interface IProps {
   item: IVideo;
   setShowMenu: (show: boolean) => void;
+  videos: IVideo[];
 }
 
 export class Player extends React.PureComponent<IProps> {
@@ -51,16 +53,21 @@ export class Player extends React.PureComponent<IProps> {
 
   render() {
     // const {item} = this.props;
+    const {videos} = this.props;
+    if (this.videoRef && videos) {
+      PlayerService.getInstance().initPlayer(
+        this.videoRef,
+        videos[0].metadata.manifest,
+      );
+    }
+
     return (
       <VideoPlayer
         ref={this.setVideoRef}
         spotlightDisabled={this.state.panelsVisible}
         className={'enact-fit'}
+        id="videoTest"
       >
-        <source
-          src={'http://media.w3.org/2010/05/sintel/trailer.mp4'}
-          type="video/mp4"
-        />
         <infoComponents>Описание</infoComponents>
         <MediaControls>
           <rightComponents>

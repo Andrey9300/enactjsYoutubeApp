@@ -6,7 +6,8 @@ export type TRoutes =
   | 'lastSeen'
   | 'player'
   | 'profile'
-  | 'channels';
+  | 'channels'
+  | 'kids';
 
 export const setRoute = (payload: TRoutes) =>
   ({

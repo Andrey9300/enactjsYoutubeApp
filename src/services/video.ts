@@ -20,13 +20,13 @@ export async function videoPlaylistService(params: any) {
   });
 }
 
-// export async function videoListService({ids}: {ids: number[]}) {
-//   return axiosRequest<IVideo[]>({
-//     method: 'GET',
-//     endpoint: EApiUrls.VIDEO_LIST,
-//     params: {
-//       ids: ids.join(','),
-//     },
-//     version: EConstants.API_VERSION_V2,
-//   });
-// }
+export async function videoListService({ids}: {ids: number[]}) {
+  return axiosRequest<IVideo[]>({
+    method: 'GET',
+    endpoint: EApiUrls.VIDEO_LIST,
+    params: {
+      ids: ids.join(','),
+    },
+    version: EConstants.API_VERSION_V2,
+  });
+}

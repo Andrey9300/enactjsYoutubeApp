@@ -4,13 +4,8 @@ import {ERoutes} from './routes.constants';
 
 export type TRoutesAction = TypedAction<typeof import('./routes.actions')>;
 
-export interface IRoutesStore {
-  route: string;
-  showMenu: boolean;
-}
-
 export const route: Reducer<string, TRoutesAction> = (
-  state = 'channels', // поменять
+  state = 'kids', // поменять
   action,
 ) => {
   switch (action.type) {

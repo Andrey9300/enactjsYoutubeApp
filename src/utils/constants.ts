@@ -4,4 +4,5 @@ export enum EConstants {
   REQUEST_TIMEOUT = '5000',
   RESPONSE_TYPE = 'json',
   COLLECT = '1',
+  PLAYLIST_TYPE_DEFAULT = 'application/x-mpegURL',
 }

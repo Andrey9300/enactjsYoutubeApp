@@ -13,6 +13,7 @@ export enum EPathNames {
   PLAYER = 'Плеер',
   PROFILE = 'Профиль',
   CHANNELS = 'Каналы',
+  KIDS = 'Дети',
 }
 
 interface IDispatchProps {
@@ -29,6 +30,7 @@ class RoutesComponent extends React.PureComponent<IProps> {
     EPathNames.PLAYER,
     EPathNames.PROFILE,
     EPathNames.CHANNELS,
+    EPathNames.KIDS,
   ];
 
   private changeRoute = (event) => {
@@ -58,6 +60,9 @@ class RoutesComponent extends React.PureComponent<IProps> {
         break;
       case EPathNames.CHANNELS:
         setRoute('channels');
+        break;
+      case EPathNames.KIDS:
+        setRoute('kids');
         break;
     }
   };

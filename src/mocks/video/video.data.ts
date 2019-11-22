@@ -1,5 +1,5 @@
-import {IVideo} from '@/interfaces/IVideo';
-import {FAKE_M3U8} from '@/mocks/video/m3u8';
+import {IVideo} from '../../interfaces/IVideo';
+import {FAKE_M3U8} from './m3u8';
 
 export const FAKE_VIDEO: IVideo = {
   metadata: {

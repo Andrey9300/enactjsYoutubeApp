@@ -23,7 +23,9 @@ export class Playlist extends React.PureComponent<IProps> {
 
   renderItem = ({index, ...rest}) => {
     const {items} = this.props;
-
+    if (!items.length) {
+      return null;
+    }
     // TODO: объединить GridListImageItem c playlistGrid
     return (
       <GridListImageItem

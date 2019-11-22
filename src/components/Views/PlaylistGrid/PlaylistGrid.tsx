@@ -24,14 +24,23 @@ export class PlaylistGrid extends React.PureComponent<IProps> {
 
   renderItem = ({index, ...rest}) => {
     const {items} = this.props;
+    let title = 'test';
+    let posterSrc = '/test';
+    let description = 'test';
+
+    if (items.length && items[index]) {
+      title = getVideoTitle(items[index]);
+      posterSrc = getPosterSrc(items[index]);
+      description = getVideoDescription(items[index]);
+    }
 
     return (
       <GridListImageItem
         {...rest}
         onClick={this.playVideo}
-        caption={getVideoTitle(items[index])}
-        source={getPosterSrc(items[index])}
-        subCaption={getVideoDescription(items[index])}
+        caption={title}
+        source={posterSrc}
+        subCaption={description}
       />
     );
   };

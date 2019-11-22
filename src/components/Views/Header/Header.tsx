@@ -24,6 +24,8 @@ export const HeaderWrapper = kind<IProps>({
         title = EPathNames.PROFILE;
       case 'channels':
         title = EPathNames.CHANNELS;
+      case 'kids':
+        title = EPathNames.KIDS;
         break;
     }
 

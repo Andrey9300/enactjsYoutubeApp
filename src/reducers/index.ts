@@ -1,16 +1,16 @@
 import {combineReducers} from 'redux';
-import {IRoutesStore, routesReducer} from '../modules/routes/routes.reducers';
-import {
-  IPlaylistStore,
-  playlistReducer,
-} from '../modules/playlist/playlist.reducers';
+import {routesReducer} from '../modules/routes/routes.reducers';
+import {videosReducer} from '../modules/videos/videos.reducers';
+import {recommendationsReducer} from '../modules/recommendations/recommendations.reducers';
+import {kidsSerialsReducer} from '../modules/kidsSerials/kidsSerials.reducers';
+import {kidsSerialReducer} from '../modules/kidsSerial/kidsSerial.reducers';
 
-export interface IStore {
-  routesReducer: IRoutesStore;
-  playlistReducer: IPlaylistStore;
-}
-
-export const rootReducer = combineReducers<IStore>({
+export const rootReducer = combineReducers({
   routesReducer,
-  playlistReducer,
+  videosReducer,
+  recommendationsReducer,
+  kidsSerialsReducer,
+  kidsSerialReducer,
 });
+
+export interface IStore extends ReturnType<typeof rootReducer> {}
