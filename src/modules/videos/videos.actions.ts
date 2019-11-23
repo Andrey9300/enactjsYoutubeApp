@@ -1,7 +1,11 @@
 import {EVideos} from './videos.constants';
 import {IVideo} from '../../interfaces/IVideo';
 
-export const videosApply = (payload: {[key: number]: IVideo}) =>
+export interface IVideos {
+  [key: number]: IVideo;
+}
+
+export const videosApply = (payload: IVideos) =>
   ({
     type: EVideos.VIDEOS_APPLY,
     payload,

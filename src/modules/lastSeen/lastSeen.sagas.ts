@@ -1,10 +1,7 @@
 import {call, put} from 'redux-saga/effects';
 
-import {
-  recommendationsError,
-  recommendationsSuccess,
-} from './recommendations.actions';
-import {videoPlaylistService} from '../../services/video';
+import {lastSeenError, lastSeenSuccess} from './lastSeen.actions';
+import {lastSeenService} from '../../services/lastSeen';
 import {normalizeVideos} from '../../services/normalizers/video';
 import {EVideoParameters} from '../videos/videos.constants';
 import {videosApply} from '../videos/videos.actions';
@@ -17,18 +14,17 @@ export interface IParamsForPlaylist {
   from_start?: boolean;
 }
 
-// TODO: добавить параметры запроса
-export function* recommendationsStartSaga() {
+export function* lastSeenStartSaga() {
   const limit = EVideoParameters.LIMIT_VIDEO_FOR_PLAYLIST;
 
   const paramsForPlaylist: IParamsForPlaylist = {
     limit,
   };
 
-  const axiosResponse = yield call(videoPlaylistService, paramsForPlaylist);
+  const axiosResponse = yield call(lastSeenService, paramsForPlaylist);
 
   if ('error' in axiosResponse) {
-    yield put(recommendationsError({}));
+    yield put(lastSeenError({}));
     return;
   }
 
@@ -37,5 +33,5 @@ export function* recommendationsStartSaga() {
   const normalizeVideo = normalizeVideos(response);
 
   yield put(videosApply(normalizeVideo.entities.videos));
-  yield put(recommendationsSuccess(normalizeVideo.result));
+  yield put(lastSeenSuccess(normalizeVideo.result));
 }

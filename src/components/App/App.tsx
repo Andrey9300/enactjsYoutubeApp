@@ -16,10 +16,8 @@ import {Channels} from '../Pages/Channels/Channels';
 
 import {WrapperRow, WrapperCell, WrapperCellHeader} from './AppStyles';
 import {Routes} from '../Views/Routes/Routes';
-import {setRoute, setShowMenu} from '../../modules/routes/routes.actions';
+import {setRoute} from '../../modules/routes/routes.actions';
 import {HeaderWrapper} from '../Views/Header/Header';
-import {recommendationsStart} from '../../modules/recommendations/recommendations.actions';
-import {IVideosStore} from '../../modules/videos/videos.reducers';
 import {Kids} from '../Pages/Kids/Kids';
 
 const RoutablePanels = Routable({navigate: 'onBack'}, Panels);
@@ -27,35 +25,15 @@ const RoutablePanels = Routable({navigate: 'onBack'}, Panels);
 interface IStateProps {
   route: string;
   showMenu: boolean;
-  videos: IVideosStore;
-  recommendations: number[];
 }
 
 interface IDispatchProps {
-  setShowMenu: typeof setShowMenu;
   setRoute: typeof setRoute;
-  recommendationsStart: typeof recommendationsStart;
 }
 
 interface IProps extends IStateProps, IDispatchProps {}
 
 class AppComponent extends React.PureComponent<IProps> {
-  componentDidMount(): void {
-    const {recommendationsStart} = this.props;
-    recommendationsStart();
-  }
-
-  componentDidUpdate(
-    prevProps: Readonly<IProps>,
-    prevState: Readonly<{}>,
-    snapshot?: any,
-  ): void {
-    if (prevProps.route !== this.props.route) {
-      const {recommendationsStart} = this.props;
-      recommendationsStart();
-    }
-  }
-
   handleKeyDown = (event) => {
     const {setRoute} = this.props;
     add('back', 461);
@@ -66,20 +44,7 @@ class AppComponent extends React.PureComponent<IProps> {
   };
 
   render() {
-    const {
-      route,
-      showMenu,
-      setShowMenu,
-      setRoute,
-      videos,
-      recommendations,
-    } = this.props;
-
-    if (!recommendations) {
-      return null;
-    }
-
-    const recommendationsVideos = recommendations.map((id) => videos[id]);
+    const {route, showMenu, setRoute} = this.props;
 
     return (
       <WrapperRow onKeyDown={this.handleKeyDown}>
@@ -88,11 +53,7 @@ class AppComponent extends React.PureComponent<IProps> {
         </WrapperCell>
         <Cell>
           <Column>
-            <WrapperCellHeader
-              size={90}
-              component="header"
-              display={showMenu ? 'block' : 'none'}
-            >
+            <WrapperCellHeader size={30} component="header" display={'block'}>
               <HeaderWrapper route={route} />
             </WrapperCellHeader>
             <Cell>
@@ -102,19 +63,10 @@ class AppComponent extends React.PureComponent<IProps> {
                 path={route}
                 noCloseButton={true}
               >
-                <Route
-                  path="main"
-                  component={Main}
-                  videos={recommendationsVideos}
-                />
+                <Route path="main" component={Main} />
                 <Route path="search" component={Search} />
                 <Route path="lastSeen" component={LastSeen} />
-                <Route
-                  path="player"
-                  component={Player}
-                  setShowMenu={setShowMenu}
-                  videos={recommendationsVideos}
-                />
+                <Route path="player" component={Player} />
                 <Route path="profile" component={Profile} />
                 <Route path="channels" component={Channels} />
                 <Route path="kids" component={Kids} />
@@ -127,21 +79,13 @@ class AppComponent extends React.PureComponent<IProps> {
   }
 }
 
-const mapStateToProps = ({
-  routesReducer: {route, showMenu},
-  videosReducer: {videos},
-  recommendationsReducer: {recommendations},
-}): IStateProps => ({
+const mapStateToProps = ({routesReducer: {route, showMenu}}): IStateProps => ({
   route,
   showMenu,
-  videos,
-  recommendations,
 });
 
 const mapDispatchToProps: IDispatchProps = {
-  setShowMenu,
   setRoute,
-  recommendationsStart,
 };
 
 export const App = MoonstoneDecorator(

@@ -15,7 +15,7 @@ export class CollectionRecommendationsGrid extends React.PureComponent<IProps> {
     return (
       <>
         <BodyText>Рекомендованные</BodyText>
-        <PlaylistGrid id="1" items={videos} />
+        {/*<PlaylistGrid id="1" items={videos} />*/}
       </>
     );
   }

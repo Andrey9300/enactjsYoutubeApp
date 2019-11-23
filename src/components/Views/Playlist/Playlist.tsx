@@ -1,44 +1,39 @@
 import React from 'react';
 import VirtualList from '@enact/moonstone/VirtualList';
 import ri from '@enact/ui/resolution';
-import GridListImageItem from '@enact/moonstone/GridListImageItem';
 
-import {getVideoTitle} from '../../../utils/IVideo/title';
-import {getPosterSrc} from '../../../utils/IVideo/poster';
-import {getVideoDescription} from '../../../utils/IVideo/description';
+import {
+  heightItem,
+  widthItem,
+  WrapperGridListImageItem,
+} from './PlaylistStyles';
+import {getVideoId} from '../../../utils/IVideo/id';
 
 interface IProps {
   id: string;
   items: Array<any>;
-  onClick?: () => void;
+  playVideo: (videoId: number) => void;
 }
 
-const widthItem = 480;
-const heightItem = 370;
-
 export class Playlist extends React.PureComponent<IProps> {
-  private playVideo = () => {
-    console.log('click');
-  };
-
   renderItem = ({index, ...rest}) => {
-    const {items} = this.props;
+    const {items, playVideo} = this.props;
+
     if (!items.length) {
       return null;
     }
-    // TODO: объединить GridListImageItem c playlistGrid
+
+    const playCurrentVideo = () => {
+      playVideo(getVideoId(items[index]));
+    };
+
     return (
-      <GridListImageItem
+      <WrapperGridListImageItem
         {...rest}
         key={index}
-        style={{
-          width: `${ri.scale(widthItem)}px`,
-          height: `${ri.scale(heightItem)}px`,
-        }}
-        onClick={this.playVideo}
-        caption={getVideoTitle(items[index])}
-        source={getPosterSrc(items[index])}
-        subCaption={getVideoDescription(items[index])}
+        index={index}
+        items={items}
+        playVideo={playCurrentVideo}
       />
     );
   };

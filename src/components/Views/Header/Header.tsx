@@ -1,6 +1,5 @@
 import React from 'react';
 import kind from '@enact/core/kind';
-import {Header} from '@enact/moonstone/Panels';
 
 import {LogoWithTitle} from '../../Icons/LogoWithTitle/LogoWithTitle';
 import {EPathNames} from '../Routes/Routes';
@@ -29,10 +28,6 @@ export const HeaderWrapper = kind<IProps>({
         break;
     }
 
-    return (
-      <Header title={title} type="compact">
-        <LogoWithTitle />
-      </Header>
-    );
+    return <LogoWithTitle />;
   },
 });

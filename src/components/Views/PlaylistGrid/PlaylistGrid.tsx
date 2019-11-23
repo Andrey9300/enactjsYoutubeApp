@@ -34,6 +34,7 @@ export class PlaylistGrid extends React.PureComponent<IProps> {
       description = getVideoDescription(items[index]);
     }
 
+    // TODO: взять из Item
     return (
       <GridListImageItem
         {...rest}

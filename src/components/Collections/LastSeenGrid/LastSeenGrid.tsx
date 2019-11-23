@@ -11,7 +11,7 @@ export class CollectionLastSeenGrid extends React.PureComponent<IProps> {
     return (
       <>
         <BodyText>Просмотренные видео</BodyText>
-        <PlaylistGrid id="1" items={getMockVideoInfoCollection(30)} />
+        {/*<PlaylistGrid id="1" items={getMockVideoInfoCollection(30)} />*/}
       </>
     );
   }

@@ -9,6 +9,7 @@ const manifestUri =
 export class PlayerService {
   private static instance: PlayerService;
   private start = false;
+  private player: any;
 
   private constructor() {}
 
@@ -19,14 +20,12 @@ export class PlayerService {
     return PlayerService.instance;
   }
 
-  public initPlayer(videoTag: HTMLVideoElement, manifest: any) {
+  public init() {
     if (this.start) {
       return;
     }
     this.start = true;
-    videojs.Hls.xhr.beforeRequest = (options) => {
-      return options;
-    };
+
     const playerOptions = {
       html5: {
         hls: {
@@ -34,45 +33,41 @@ export class PlayerService {
         },
       },
     };
-    const player = videojs('videoTest', playerOptions);
+    this.player = videojs('videoPlayer', playerOptions);
+  }
 
-    player.src({
+  public play = (manifest) => {
+    if (!this.player) {
+      return;
+    }
+    this.player.src({
       src: getPlaylistSrc(manifest),
       type: 'application/x-mpegURL',
       withCredentials: true,
     });
 
-    player.ready(() => {
-      player.play();
+    this.player.ready(() => {
+      this.player.play();
+      this.player.requestFullscreen();
     });
-    // XMLHttpRequest cannot load http://hb.bizmrg.com/1ffd208e-2f0b-4216-9d08-7719c25029f3/vc/1d2a6796-9935-42a2-a4b4-1775befc7e26.
-    // No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://192.168.0.14:2121' is therefore not allowed access.
-
-    // const video = document.getElementById('videoTest');
-    // console.log('video', video);
-    // const player = new shaka.Player(video);
-    // player.getNetworkingEngine().registerRequestFilter((type, request) => {
-    //   // Only add headers to license requests:
-    //   // if (type == shaka.net.NetworkingEngine.RequestType.LICENSE) {
-    //   // }
-    //   // This is the specific header name and value the server wants:
-    //   // request.headers = 'VGhpc0lzQVRlc3QK';
-    //   console.log(request);
-    //   // request.headers['origin'] = 'http://ttt.ru';
-    //   request.allowCrossSiteCredentials = true;
-    //   // request.referer = 'http://ttt.ru';
-    // });
-    // console.log('isBrowserSupported: ', shaka.Player.isBrowserSupported());
-    // player.addEventListener('error', this.onErrorEvent);
-    //
-    // player.load(getPlaylistSrc(manifest)).then(() => {
-    //   console.log('The video has now been loaded!');
-    // }).catch(this.onError);
-  }
-
-  private onErrorEvent = (event) => {
-    this.onError(event.detail);
   };
+
+  // public init() {
+  //   // Create a Player instance.
+  //   const video = document.getElementById('videoPlayer');
+  //   this.player = new shaka.Player(video);
+  //
+  //   this.player.addEventListener('error', this.onErrorEvent);
+  // }
+  //
+  // public play = (manifest) => {
+  //   this.player.load(`${getPlaylistSrc(manifest)}`).then(() => {
+  //     console.log('The video has now been loaded!');
+  //   }).catch(this.onError);  // onError is executed if the asynchronous load fails.
+  // };
+  // private onErrorEvent = (event) => {
+  //   this.onError(event.detail);
+  // };
 
   private onError = (error) => {
     console.error('Error code', error.code, 'object', error);

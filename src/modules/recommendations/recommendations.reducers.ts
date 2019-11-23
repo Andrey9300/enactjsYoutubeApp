@@ -12,10 +12,10 @@ export const recommendations: Reducer<number[], TPlaylistAction> = (
 ) => {
   switch (action.type) {
     case ERecommendations.RECOMMENDATIONS_SUCCESS: {
-      return state.concat(action.payload);
+      return [...state, ...action.payload];
     }
     case ERecommendations.RECOMMENDATIONS_ERROR: {
-      return state.concat(action.payload);
+      return state;
     }
     default:
       return state;

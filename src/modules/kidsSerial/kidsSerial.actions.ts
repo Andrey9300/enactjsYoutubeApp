@@ -1,6 +1,6 @@
 import {EKidsSerial} from './kidsSerial.constants';
 
-export interface IKidsSerialSuccess {
+export interface IKidsSerial {
   [key: number]: {videos: number[]; serialName: string};
 }
 
@@ -26,7 +26,7 @@ export const kidsSerialLoading = () =>
     type: EKidsSerial.KIDS_SERIAL_LOADING,
   } as const);
 
-export const kidsSerialSuccess = (payload: IKidsSerialSuccess) =>
+export const kidsSerialSuccess = (payload: IKidsSerial) =>
   ({
     type: EKidsSerial.KIDS_SERIAL_SUCCESS,
     payload,

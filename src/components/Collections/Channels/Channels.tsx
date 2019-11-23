@@ -49,12 +49,12 @@ export class CollectionChannels extends React.PureComponent<IProps> {
         cbScrollTo={this.getScrollTo}
         onKeyDown={this.handleKeyDown}
       >
-        <BodyText>Каналы</BodyText>
-        <Playlist id="1" items={getMockVideoInfoCollection(30)} />
-        <BodyText>Каналы 2</BodyText>
-        <Playlist id="2" items={getMockVideoInfoCollection(30)} />
-        <BodyText>Каналы 3</BodyText>
-        <Playlist id="3" items={getMockVideoInfoCollection(30)} />
+        {/*<BodyText>Каналы</BodyText>*/}
+        {/*<Playlist id="1" items={getMockVideoInfoCollection(30)} />*/}
+        {/*<BodyText>Каналы 2</BodyText>*/}
+        {/*<Playlist id="2" items={getMockVideoInfoCollection(30)} />*/}
+        {/*<BodyText>Каналы 3</BodyText>*/}
+        {/*<Playlist id="3" items={getMockVideoInfoCollection(30)} />*/}
       </Scroller>
     );
   }

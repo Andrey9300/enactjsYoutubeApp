@@ -1,20 +1,27 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import VideoPlayer, {MediaControls} from '@enact/moonstone/VideoPlayer';
 import IconButton from '@enact/moonstone/IconButton';
 import Spotlight from '@enact/spotlight';
 
-import {IVideo} from '../../../interfaces/IVideo';
 import {PlayerService} from '../../../services/playerService';
+import {setRoute} from '../../../modules/routes/routes.actions';
+import {IVideo} from '../../../interfaces/IVideo';
+import {playlistPlayVideo} from '../../../modules/playlist/playlist.actions';
 
-interface IProps {
-  item: IVideo;
-  setShowMenu: (show: boolean) => void;
+interface IStateProps {
   videos: IVideo[];
+  playlistCurrentVideo: number;
 }
 
-export class Player extends React.PureComponent<IProps> {
-  private videoRef = null;
+interface IDispatchProps {
+  setRoute: typeof setRoute;
+  playlistPlayVideo: typeof playlistPlayVideo;
+}
 
+interface IProps extends IStateProps, IDispatchProps {}
+
+export class PlayerComponent extends React.PureComponent<IProps> {
   state = {
     panelIndex: 0,
     panelsVisible: false,
@@ -22,9 +29,10 @@ export class Player extends React.PureComponent<IProps> {
   };
 
   componentDidMount(): void {
-    const {setShowMenu} = this.props;
+    const {playlistPlayVideo} = this.props;
 
-    setShowMenu(false);
+    PlayerService.getInstance().init();
+    playlistPlayVideo();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -34,39 +42,16 @@ export class Player extends React.PureComponent<IProps> {
     }
   }
 
-  // handleNextPanelClick = () => this.setState(prevState => ({panelIndex: prevState.panelIndex + 1}))
-
-  // handleSelectBreadcrumb = ({index}) => this.setState({panelIndex: index})
-
-  handleHidePanelsClick = () => this.setState({panelsVisible: false});
-
   handleShowPanelsClick = () => {
-    this.videoRef.hideControls();
     this.setState({panelsVisible: true});
   };
 
-  setVideoIndex = (videoIndex) => this.setState({videoIndex});
-
-  setVideoRef = (ref) => {
-    this.videoRef = ref;
-  };
-
   render() {
-    // const {item} = this.props;
-    const {videos} = this.props;
-    if (this.videoRef && videos) {
-      PlayerService.getInstance().initPlayer(
-        this.videoRef,
-        videos[0].metadata.manifest,
-      );
-    }
-
     return (
       <VideoPlayer
-        ref={this.setVideoRef}
         spotlightDisabled={this.state.panelsVisible}
         className={'enact-fit'}
-        id="videoTest"
+        id="videoPlayer"
       >
         <infoComponents>Описание</infoComponents>
         <MediaControls>
@@ -84,3 +69,21 @@ export class Player extends React.PureComponent<IProps> {
     );
   }
 }
+
+const mapStateToProps = ({
+  videosReducer: {videos},
+  playlistReducer: {playlistCurrentVideo},
+}): IStateProps => ({
+  videos,
+  playlistCurrentVideo,
+});
+
+const mapDispatchToProps: IDispatchProps = {
+  setRoute,
+  playlistPlayVideo,
+};
+
+export const Player = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(PlayerComponent);

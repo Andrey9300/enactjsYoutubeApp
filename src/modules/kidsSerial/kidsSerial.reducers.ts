@@ -1,11 +1,11 @@
 import {combineReducers, Reducer} from 'redux';
 
 import {EKidsSerial} from './kidsSerial.constants';
-import {IKidsSerialSuccess} from './kidsSerial.actions';
+import {IKidsSerial} from './kidsSerial.actions';
 
 type TKidsSerialAction = TypedAction<typeof import('./kidsSerial.actions')>;
 
-const kidsSerial: Reducer<IKidsSerialSuccess, TKidsSerialAction> = (
+const kidsSerial: Reducer<IKidsSerial, TKidsSerialAction> = (
   state = [],
   action,
 ) => {

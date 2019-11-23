@@ -1,4 +1,4 @@
-import {all, call, fork, takeEvery} from 'redux-saga/effects';
+import {all, fork, takeEvery} from 'redux-saga/effects';
 
 import {ERecommendations} from './recommendations.constants';
 import {recommendationsStartSaga} from './recommendations.sagas';
