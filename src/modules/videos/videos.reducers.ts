@@ -33,6 +33,7 @@ export const initialVideoState: IVideo = {
     preview: [],
     rating: null,
     thumbnails: [],
+    category: null,
   },
   chunk_len: 10,
   originalIndex: null,

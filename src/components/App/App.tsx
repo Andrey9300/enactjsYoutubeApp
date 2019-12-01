@@ -39,7 +39,7 @@ class AppComponent extends React.PureComponent<IProps> {
     add('back', 461);
 
     if (is('back')(event.keyCode)) {
-      setRoute('main');
+      setRoute('kids');
     }
   };
 
@@ -47,13 +47,20 @@ class AppComponent extends React.PureComponent<IProps> {
     const {route, showMenu, setRoute} = this.props;
 
     return (
-      <WrapperRow onKeyDown={this.handleKeyDown}>
-        <WrapperCell size="15%" display={showMenu ? 'block' : 'none'}>
+      <WrapperRow
+        onKeyDown={this.handleKeyDown}
+        padding={showMenu ? '0.5' : '0'}
+      >
+        <WrapperCell size="15%" display={showMenu ? 'none' : 'none'}>
           <Routes />
         </WrapperCell>
         <Cell>
           <Column>
-            <WrapperCellHeader size={30} component="header" display={'block'}>
+            <WrapperCellHeader
+              size={65}
+              component="header"
+              display={showMenu ? 'block' : 'none'}
+            >
               <HeaderWrapper route={route} />
             </WrapperCellHeader>
             <Cell>

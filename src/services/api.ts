@@ -68,6 +68,9 @@ export async function axiosRequest<T = unknown>({
     timeout: Number(EConstants.REQUEST_TIMEOUT),
     withCredentials: true /** TODO: выключать в сторибуке */,
     responseType: EConstants.RESPONSE_TYPE,
+    headers: {
+      'X-Pulsar-Mode': 'kids',
+    },
   };
 
   return axios(axiosParams)

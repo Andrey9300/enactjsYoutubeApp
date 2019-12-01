@@ -8,7 +8,7 @@ import {IVideos} from '../../../modules/videos/videos.actions';
 interface IProps {
   kidsSerial: IKidsSerial;
   videos: IVideos;
-  playVideo: () => void;
+  playVideo: (videoIds: number[]) => (currentVideoId: number) => void;
 }
 
 export class CollectionKidsSerials extends React.PureComponent<IProps> {
@@ -58,13 +58,17 @@ export class CollectionKidsSerials extends React.PureComponent<IProps> {
       }
       const serialVideos = kidsSerial[serialId].videos.map((id) => videos[id]);
 
+      const playVideoKidsSeries = (videoId: number) => {
+        return playVideo(kidsSerial[serialId].videos)(videoId);
+      };
+
       return (
         <div key={index}>
           <img src={this.getImageSrc(serialId)} width="200" height="100" />
           <Playlist
             id={String(index)}
             items={serialVideos}
-            playVideo={playVideo}
+            playVideo={playVideoKidsSeries}
           />
         </div>
       );

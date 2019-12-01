@@ -51,6 +51,7 @@ export class Playlist extends React.PureComponent<IProps> {
         itemSize={ri.scale(widthItem)}
         id={id}
         spotlightId={id}
+        spacing={ri.scale(50)}
       />
     );
   }

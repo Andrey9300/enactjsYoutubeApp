@@ -20,3 +20,6 @@ export const playlistSetCurrentVideo = (payload: number) =>
 
 export const playlistPlayVideo = () =>
   ({type: EPlaylist.PLAYLIST_PLAY_VIDEO} as const);
+
+export const playlistPlayNextVideo = () =>
+  ({type: EPlaylist.PLAYLIST_PLAY_NEXT_VIDEO} as const);

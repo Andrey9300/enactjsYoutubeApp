@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 import {Cell, Row} from '@enact/ui/Layout';
 
-export const WrapperRow = styled(Row)`
-  background: url(http://ges-design.ru/library/collage/background/background-15-9.jpg)
-    no-repeat;
+export const WrapperRow = styled(Row)<{padding: number}>`
+  background: url(http://pic0.oboi-store.ru/files/products/54214-3-oboi-andrea-rossi-torcello-36315172-195016.206x174xx1.jpg);
   background-size: cover;
   height: 100%;
-  padding: 0.5rem;
+  padding: ${({padding}) => padding}rem;
 `;
 
 export const WrapperCell = styled(Cell)<{

@@ -4,7 +4,7 @@ import Scroller from '@enact/moonstone/Scroller';
 import {add, is} from '@enact/core/keymap';
 
 import {IVideo} from '../../../interfaces/IVideo';
-import {getMockVideoInfoCollection} from '../../../mocks/unitTests/videoInfoCollections';
+import {getMockVideoInfoCollection} from '../../../mocks/utils/videoInfoCollections';
 import {Playlist} from '../../Views/Playlist/Playlist';
 
 interface IChannel {

@@ -49,6 +49,7 @@ export interface IContent {
   preview?: IPreview[];
   rating: IRating;
   thumbnails?: IThumbnails[];
+  category: string;
 }
 
 interface IPreview {

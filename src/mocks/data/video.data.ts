@@ -1,9 +1,9 @@
 import {IVideo} from '../../interfaces/IVideo';
-import {FAKE_M3U8} from './m3u8';
+import poster from './poster.svg';
 
 export const FAKE_VIDEO: IVideo = {
   metadata: {
-    manifest: FAKE_M3U8,
+    manifest: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
     start_video: 0,
     duration: null,
     duration_ms: null,
@@ -16,12 +16,20 @@ export const FAKE_VIDEO: IVideo = {
   },
   content: {
     id: 1,
-    title: 'this is a fallback title',
-    description: 'this is a fallback description',
+    title: '',
+    description: '',
     logo: null,
     genres: [],
-    poster: [],
+    poster: [
+      {
+        height: 640,
+        url: poster,
+        webp_url: null,
+        width: 320,
+      },
+    ],
     external_links: [],
+    category: 'series',
     preview: [],
     rating: null,
     thumbnails: [],
@@ -29,5 +37,3 @@ export const FAKE_VIDEO: IVideo = {
   chunk_len: 10,
   originalIndex: 0,
 };
-
-export const FAKE_VIDEO_PLAYLIST_RESPONSE: IVideo[] = [FAKE_VIDEO];

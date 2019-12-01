@@ -39,8 +39,9 @@ interface IProps extends IStateProps, IDispatchProps {}
 
 export class KidsComponent extends React.PureComponent<IProps> {
   private scrollTo = null;
-  private positionY = 0;
-  private step = 600;
+  private preventScroll = false;
+  private currentY = 0;
+  private step = 500;
 
   private playVideo = (videoIds: number[]) => {
     const {playlistSetVideos, playlistSetCurrentVideo, setRoute} = this.props;
@@ -57,22 +58,40 @@ export class KidsComponent extends React.PureComponent<IProps> {
     this.scrollTo = scrollTo;
   };
 
+  private handlerOnScrollStart = () => {
+    this.preventScroll = true;
+  };
+
+  private handlerOnScrollStop = (event) => {
+    if (event.reachedEdgeInfo.bottom) {
+      this.currentY = event.scrollTop;
+    } else if (event.reachedEdgeInfo.top) {
+      this.currentY = 0;
+    }
+
+    this.preventScroll = false;
+  };
+
   private handleKeyDown = (event) => {
     add('up', 38);
     add('down', 40);
 
-    if (!this.scrollTo) {
+    if (!this.scrollTo || this.preventScroll) {
       return;
     }
 
     if (is('up')(event.keyCode)) {
-      this.scrollTo({position: {y: this.positionY - this.step}});
+      if (this.currentY - this.step >= 0) {
+        this.currentY = this.currentY - this.step;
+        this.scrollTo({position: {y: this.currentY}, focus: true});
+      }
     } else if (is('down')(event.keyCode)) {
-      this.scrollTo({position: {y: this.positionY + this.step}});
+      this.currentY = this.currentY + this.step;
+      this.scrollTo({position: {y: this.currentY}, focus: true});
     }
   };
 
-  componentDidMount(): void {
+  componentDidMount() {
     const {kidsSerialsStart, recommendationsStart, lastSeenStart} = this.props;
 
     kidsSerialsStart({serialsIds: serialIds});
@@ -87,8 +106,9 @@ export class KidsComponent extends React.PureComponent<IProps> {
       <Scroller
         direction="vertical"
         verticalScrollbar="hidden"
-        style={{height: `100%`}}
         cbScrollTo={this.getScrollTo}
+        onScrollStart={this.handlerOnScrollStart}
+        onScrollStop={this.handlerOnScrollStop}
         onKeyDown={this.handleKeyDown}
       >
         <CollectionRecommendations
@@ -97,11 +117,11 @@ export class KidsComponent extends React.PureComponent<IProps> {
           playVideo={this.playVideo}
         />
         {/*<CollectionLastSeen lastSeen={lastSeen} videos={videos} />*/}
-        {/*<CollectionKidsSerials*/}
-        {/*  kidsSerial={kidsSerial}*/}
-        {/*  videos={videos}*/}
-        {/*  playVideo={this.playVideo}*/}
-        {/*/>*/}
+        <CollectionKidsSerials
+          kidsSerial={kidsSerial}
+          videos={videos}
+          playVideo={this.playVideo}
+        />
       </Scroller>
     );
   }

@@ -42,6 +42,7 @@
 		"@types/react-redux": "^7.1.5",
 		"@types/styled-components": "^4.1.20",
 		"axios": "^0.19.0",
+		"axios-mock-adapter": "^1.17.0",
 		"ilib": "^14.4.0",
 		"lodash.mergewith": "^4.6.2",
 		"normalizr": "^3.4.1",
@@ -50,13 +51,11 @@
 		"react-redux": "^7.1.1",
 		"redux": "^4.0.4",
 		"redux-saga": "^1.1.1",
-		"shaka-player": "^2.5.6",
 		"styled-components": "^4.4.1",
 		"tslint": "^5.20.0",
 		"tslint-react": "^4.1.0",
 		"typescript": "^3.6.4",
-		"video.js": "^7.6.5",
-		"videojs-contrib-hls": "^5.15.0"
+		"video.js": "^7.6.5"
 	},
 	"devDependencies": {
 		"husky": "^3.0.9",

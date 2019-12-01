@@ -17,10 +17,7 @@ export const route: Reducer<string, TRoutesAction> = (
   }
 };
 
-export const showMenu: Reducer<boolean, AnyAction> = (
-  state = false,
-  action,
-) => {
+export const showMenu: Reducer<boolean, AnyAction> = (state = true, action) => {
   switch (action.type) {
     case ERoutes.SET_SHOW_MENU: {
       return action.payload;

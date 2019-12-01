@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {getMockVideoInfoCollection} from '../../../mocks/unitTests/videoInfoCollections';
+import {getMockVideoInfoCollection} from '../../../mocks/utils/videoInfoCollections';
 import {PlaylistGrid} from '../../Views/PlaylistGrid/PlaylistGrid';
 import BodyText from '@enact/moonstone/BodyText';
 
