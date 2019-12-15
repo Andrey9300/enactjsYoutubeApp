@@ -1,6 +1,7 @@
 import {IVideo} from '../../interfaces/IVideo';
 import {FAKE_VIDEO} from '../data/video.data';
 import {getRandomInt} from '../../utils/math';
+import {posters} from '../data/posters';
 
 const DEFAULT_COLLECTION_LENGTH = 10;
 
@@ -21,6 +22,14 @@ export const getMockVideoInfoCollection = (
         id: randomInt,
         title: `${randomInt} this is a fallback title`,
         description: `${randomInt} this is a fallback description`,
+        poster: [
+          {
+            height: 640,
+            url: posters[i % 8],
+            webp_url: null,
+            width: 320,
+          },
+        ],
         category,
       },
       metadata: {

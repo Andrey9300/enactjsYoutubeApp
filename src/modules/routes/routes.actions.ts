@@ -7,7 +7,9 @@ export type TRoutes =
   | 'player'
   | 'profile'
   | 'channels'
-  | 'kids';
+  | 'kids'
+  | 'parentControl'
+  | 'checkCode';
 
 export const setRoute = (payload: TRoutes) =>
   ({

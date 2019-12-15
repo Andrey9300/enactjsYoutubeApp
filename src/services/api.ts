@@ -3,6 +3,8 @@ import axios, {AxiosRequestConfig} from 'axios';
 import {EApiUrls} from '../enums/EApiUrls';
 import {TAxiosResponse} from '../interfaces/IApi';
 import {EConstants} from '../utils/constants';
+import {getInitialParentSettingsState} from '../modules/parentSettings/parentSettings.reducers';
+import {persistedState} from '../store/configureStore';
 
 interface ICreateUrlParams {
   endpoint: EApiUrls | string;
@@ -58,7 +60,7 @@ export async function axiosRequest<T = unknown>({
 
     return acc;
   }, {});
-
+  const parentSettings = getInitialParentSettingsState(persistedState);
   const axiosParams: AxiosRequestConfig = {
     baseURL,
     url,
@@ -70,6 +72,7 @@ export async function axiosRequest<T = unknown>({
     responseType: EConstants.RESPONSE_TYPE,
     headers: {
       'X-Pulsar-Mode': 'kids',
+      'X-Pulsar-Age': parentSettings.age,
     },
   };
 

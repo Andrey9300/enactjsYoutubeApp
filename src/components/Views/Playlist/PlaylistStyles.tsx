@@ -9,8 +9,14 @@ export const heightItem = 370;
 
 export const WrapperGridListImageItem = styled(Item).attrs(() => ({
   style: {
-    color: `${colors.black}`,
+    color: colors.black,
+    backgroundColor: colors.white,
     width: `${ri.scale(widthItem)}px`,
     height: `${ri.scale(heightItem)}px`,
+    boxShadow: `0 0 ${ri.scale(10)}px`,
   },
-}))``;
+}))`
+  > div {
+    color: ${colors.black} !important;
+  }
+`;

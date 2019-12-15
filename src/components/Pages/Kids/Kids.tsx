@@ -17,12 +17,10 @@ import {
   playlistSetVideos,
 } from '../../../modules/playlist/playlist.actions';
 import {setRoute} from '../../../modules/routes/routes.actions';
-// import {CollectionLastSeen} from '../../Collections/LastSeen/LastSeen';
 
 interface IStateProps {
   kidsSerial: IKidsSerial;
   recommendations: number[];
-  lastSeen: number[];
   videos: IVideos;
 }
 
@@ -39,7 +37,6 @@ interface IProps extends IStateProps, IDispatchProps {}
 
 export class KidsComponent extends React.PureComponent<IProps> {
   private scrollTo = null;
-  private preventScroll = false;
   private currentY = 0;
   private step = 500;
 
@@ -58,25 +55,16 @@ export class KidsComponent extends React.PureComponent<IProps> {
     this.scrollTo = scrollTo;
   };
 
-  private handlerOnScrollStart = () => {
-    this.preventScroll = true;
-  };
-
   private handlerOnScrollStop = (event) => {
     if (event.reachedEdgeInfo.bottom) {
       this.currentY = event.scrollTop;
     } else if (event.reachedEdgeInfo.top) {
       this.currentY = 0;
     }
-
-    this.preventScroll = false;
   };
 
   private handleKeyDown = (event) => {
-    add('up', 38);
-    add('down', 40);
-
-    if (!this.scrollTo || this.preventScroll) {
+    if (!this.scrollTo) {
       return;
     }
 
@@ -92,6 +80,9 @@ export class KidsComponent extends React.PureComponent<IProps> {
   };
 
   componentDidMount() {
+    add('up', 38);
+    add('down', 40);
+
     const {kidsSerialsStart, recommendationsStart, lastSeenStart} = this.props;
 
     kidsSerialsStart({serialsIds: serialIds});
@@ -100,14 +91,13 @@ export class KidsComponent extends React.PureComponent<IProps> {
   }
 
   render() {
-    const {recommendations, kidsSerial, lastSeen, videos} = this.props;
+    const {recommendations, kidsSerial, videos} = this.props;
 
     return (
       <Scroller
         direction="vertical"
         verticalScrollbar="hidden"
         cbScrollTo={this.getScrollTo}
-        onScrollStart={this.handlerOnScrollStart}
         onScrollStop={this.handlerOnScrollStop}
         onKeyDown={this.handleKeyDown}
       >
@@ -116,7 +106,6 @@ export class KidsComponent extends React.PureComponent<IProps> {
           videos={videos}
           playVideo={this.playVideo}
         />
-        {/*<CollectionLastSeen lastSeen={lastSeen} videos={videos} />*/}
         <CollectionKidsSerials
           kidsSerial={kidsSerial}
           videos={videos}
@@ -131,14 +120,12 @@ const mapStateToProps = (store: IStore): IStateProps => {
   const {
     kidsSerialReducer: {kidsSerial},
     recommendationsReducer: {recommendations},
-    lastSeenReducer: {lastSeen},
     videosReducer: {videos},
   } = store;
 
   return {
     kidsSerial,
     recommendations,
-    lastSeen,
     videos,
   };
 };

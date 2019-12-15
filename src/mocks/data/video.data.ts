@@ -1,5 +1,5 @@
 import {IVideo} from '../../interfaces/IVideo';
-import poster from './poster.svg';
+import {posters} from './posters';
 
 export const FAKE_VIDEO: IVideo = {
   metadata: {
@@ -23,7 +23,7 @@ export const FAKE_VIDEO: IVideo = {
     poster: [
       {
         height: 640,
-        url: poster,
+        url: posters[0],
         webp_url: null,
         width: 320,
       },

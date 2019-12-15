@@ -2,8 +2,11 @@ import {createStore, applyMiddleware, compose, Middleware} from 'redux';
 import createSagaMiddleware, {END} from 'redux-saga';
 
 import {rootReducer} from '../reducers';
+import {LocalStorage} from '../utils/localStorage';
 
-export function configureStore(initialState = {}) {
+export const persistedState = LocalStorage.loadState();
+
+export function configureStore() {
   const sagaMiddleware = createSagaMiddleware();
   const middleware: Middleware[] = [sagaMiddleware];
 
@@ -11,12 +14,20 @@ export function configureStore(initialState = {}) {
 
   const store: any = createStore(
     rootReducer,
-    initialState,
+    persistedState,
     composeEnhancers(applyMiddleware(...middleware)),
   );
 
   store.runSaga = sagaMiddleware.run;
   store.close = () => store.dispatch(END);
+
+  store.subscribe(() => {
+    LocalStorage.saveState({
+      parentSettingsReducer: {
+        parentSettings: store.getState().parentSettingsReducer.parentSettings,
+      },
+    });
+  });
 
   return store;
 }

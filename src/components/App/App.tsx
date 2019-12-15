@@ -5,7 +5,6 @@ import {Routable, Route, Panels} from '@enact/moonstone/Panels';
 import {Cell} from '@enact/ui/Layout';
 import {SlideLeftArranger} from '@enact/ui/ViewManager';
 import {Column} from '@enact/ui/Layout';
-import {add, is} from '@enact/core/keymap';
 
 import {Search} from '../Pages/Search/Search';
 import {Main} from '../Pages/Main/Main';
@@ -17,8 +16,11 @@ import {Channels} from '../Pages/Channels/Channels';
 import {WrapperRow, WrapperCell, WrapperCellHeader} from './AppStyles';
 import {Routes} from '../Views/Routes/Routes';
 import {setRoute} from '../../modules/routes/routes.actions';
-import {HeaderWrapper} from '../Views/Header/Header';
+import {Header} from '../Views/Header/Header';
 import {Kids} from '../Pages/Kids/Kids';
+import {WindowHelper} from '../../utils/window';
+import {ParentControl} from '../Pages/ParentControl/ParentControl';
+import {CheckCode} from '../Pages/CheckCode/CheckCode';
 
 const RoutablePanels = Routable({navigate: 'onBack'}, Panels);
 
@@ -34,23 +36,26 @@ interface IDispatchProps {
 interface IProps extends IStateProps, IDispatchProps {}
 
 class AppComponent extends React.PureComponent<IProps> {
-  handleKeyDown = (event) => {
+  componentDidMount() {
     const {setRoute} = this.props;
-    add('back', 461);
+    const setKidsRoute = () => setRoute('kids');
 
-    if (is('back')(event.keyCode)) {
-      setRoute('kids');
-    }
+    WindowHelper.addEventListener(
+      'keydown',
+      WindowHelper.handleBackKeyDown(setKidsRoute),
+    );
+  }
+
+  private onClickOnParentControl = () => {
+    const {setRoute} = this.props;
+    setRoute('parentControl');
   };
 
   render() {
-    const {route, showMenu, setRoute} = this.props;
+    const {route, showMenu} = this.props;
 
     return (
-      <WrapperRow
-        onKeyDown={this.handleKeyDown}
-        padding={showMenu ? '0.5' : '0'}
-      >
+      <WrapperRow padding={showMenu ? '0.5' : '0'}>
         <WrapperCell size="15%" display={showMenu ? 'none' : 'none'}>
           <Routes />
         </WrapperCell>
@@ -61,22 +66,23 @@ class AppComponent extends React.PureComponent<IProps> {
               component="header"
               display={showMenu ? 'block' : 'none'}
             >
-              <HeaderWrapper route={route} />
+              <Header onClick={this.onClickOnParentControl} />
             </WrapperCellHeader>
             <Cell>
               <RoutablePanels
                 arranger={SlideLeftArranger}
-                onBack={setRoute}
                 path={route}
                 noCloseButton={true}
               >
                 <Route path="main" component={Main} />
                 <Route path="search" component={Search} />
-                <Route path="lastSeen" component={LastSeen} />
                 <Route path="player" component={Player} />
+                <Route path="lastSeen" component={LastSeen} />
                 <Route path="profile" component={Profile} />
                 <Route path="channels" component={Channels} />
                 <Route path="kids" component={Kids} />
+                <Route path="parentControl" component={ParentControl} />
+                <Route path="checkCode" component={CheckCode} />
               </RoutablePanels>
             </Cell>
           </Column>

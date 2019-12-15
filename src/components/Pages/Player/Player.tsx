@@ -10,7 +10,6 @@ import {
   playlistPlayVideo,
 } from '../../../modules/playlist/playlist.actions';
 import {getVideoTitle} from '../../../utils/IVideo/title';
-import {setRoute} from '../../../modules/routes/routes.actions';
 import {Wrapper} from './PlayerStyles';
 
 interface IStateProps {
@@ -21,7 +20,6 @@ interface IStateProps {
 interface IDispatchProps {
   playlistPlayVideo: typeof playlistPlayVideo;
   playlistPlayNextVideo: typeof playlistPlayNextVideo;
-  setRoute: typeof setRoute;
 }
 
 interface IProps extends IStateProps, IDispatchProps {}
@@ -34,12 +32,6 @@ export class PlayerComponent extends React.PureComponent<IProps> {
     PlayerService.getInstance().onEndedCallback(playlistPlayNextVideo);
     playlistPlayVideo();
   }
-
-  handleShowPanelsClick = () => {
-    const {setRoute} = this.props;
-
-    setRoute('kids');
-  };
 
   render() {
     const {videos, playlistCurrentVideo} = this.props;
@@ -55,12 +47,7 @@ export class PlayerComponent extends React.PureComponent<IProps> {
         <infoComponents>Описание</infoComponents>
         <MediaControls>
           <rightComponents>
-            <IconButton
-              backgroundOpacity="translucent"
-              onClick={this.handleShowPanelsClick}
-            >
-              list
-            </IconButton>
+            <IconButton backgroundOpacity="translucent">list</IconButton>
           </rightComponents>
         </MediaControls>
       </Wrapper>
@@ -79,7 +66,6 @@ const mapStateToProps = ({
 const mapDispatchToProps: IDispatchProps = {
   playlistPlayVideo,
   playlistPlayNextVideo,
-  setRoute,
 };
 
 export const Player = connect(

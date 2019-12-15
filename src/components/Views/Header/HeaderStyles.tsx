@@ -1,10 +1,18 @@
 import styled from 'styled-components';
-import {Header} from '@enact/moonstone/Panels';
+import ri from '@enact/ui/resolution';
+import Button from '@enact/moonstone/Item';
 
-import {colors} from '../../../styles/Colors';
+import ParentControl from '../../Icons/ParentControl/ParentControl.svg';
 
-export const WrapperHeader = styled(Header).attrs(() => ({
-  hideLine: true,
-}))`
-  color: ${colors.grey500} !important;
+export const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const WrapperParentControl = styled(Button)`
+  background: url(${ParentControl}) no-repeat;
+  background-size: cover;
+  width: ${ri.scale(50)}px;
+  height: ${ri.scale(50)}px;
+  margin: 0 ${ri.scale(50)}px;
 `;

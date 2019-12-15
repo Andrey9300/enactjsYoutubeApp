@@ -1,10 +1,15 @@
 import styled from 'styled-components';
 import {Cell, Row} from '@enact/ui/Layout';
+import {colors} from '../../styles/Colors';
+import KidsBackground from '../Icons/KidsBackground/KidsBackground.svg';
 
 export const WrapperRow = styled(Row)<{padding: number}>`
-  background: url(http://pic0.oboi-store.ru/files/products/54214-3-oboi-andrea-rossi-torcello-36315172-195016.206x174xx1.jpg);
-  background-size: cover;
+  background: url(${KidsBackground});
+  background-size: 130%;
   height: 100%;
+  * .moonstone {
+    color: ${colors.black};
+  }
   padding: ${({padding}) => padding}rem;
 `;
 

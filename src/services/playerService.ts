@@ -3,6 +3,7 @@ import {getPlaylistSrc} from '../utils/IVideo/playlist';
 
 export class PlayerService {
   private static instance: PlayerService;
+  private isInit = false;
   private player: any;
 
   private constructor() {}
@@ -15,6 +16,10 @@ export class PlayerService {
   }
 
   public init() {
+    if (this.isInit) {
+      return;
+    }
+    this.isInit = true;
     const playerOptions = {
       html5: {
         hls: {
@@ -31,7 +36,7 @@ export class PlayerService {
     }
 
     this.player.src({
-      src: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
+      src: getPlaylistSrc(manifest),
       type: 'application/x-mpegURL',
     });
 
