@@ -111,7 +111,3 @@ declare module 'uuid';
 declare module 'lodash.throttle';
 
 declare module 'redux-saga-testing';
-
-declare module 'videojs-contrib-quality-levels';
-
-declare module 'videojs-http-source-selector';

@@ -11,6 +11,9 @@ import {
 } from '../../../modules/playlist/playlist.actions';
 import {getVideoTitle} from '../../../utils/IVideo/title';
 import {Wrapper} from './PlayerStyles';
+import {getVideoManifest} from '../../../utils/IVideo/manifest';
+import {getPlaylistSrc} from '../../../utils/IVideo/playlist';
+import {EConstants} from '../../../utils/constants';
 
 interface IStateProps {
   videos: IVideo[];
@@ -36,14 +39,11 @@ export class PlayerComponent extends React.PureComponent<IProps> {
   render() {
     const {videos, playlistCurrentVideo} = this.props;
     const title = getVideoTitle(videos[playlistCurrentVideo]);
+    const src = getPlaylistSrc(getVideoManifest(videos[playlistCurrentVideo]));
 
     return (
-      <Wrapper
-        title={title}
-        className={'enact-fit'}
-        id="videoPlayer"
-        autoPlay={true}
-      >
+      <Wrapper title={title} className="enact-fit" id={EConstants.VIDEO_TAG_ID}>
+        <source src={src} type="application/x-mpegURL" />
         <infoComponents>Описание</infoComponents>
         <MediaControls>
           <rightComponents>

@@ -5,4 +5,5 @@ export enum EConstants {
   RESPONSE_TYPE = 'json',
   COLLECT = '1',
   PLAYLIST_TYPE_DEFAULT = 'application/x-mpegURL',
+  VIDEO_TAG_ID = 'videoPlayer',
 }

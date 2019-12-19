@@ -34,8 +34,5 @@ export function* playlistPlayIndexVideoSaga(videoId: number) {
     return;
   }
 
-  const currentVideo = videos[videoId];
-  const playerService = yield call([PlayerService, 'getInstance']);
   yield put(playlistSetCurrentVideo(videoId));
-  yield call([playerService, 'play'], getVideoManifest(currentVideo));
 }

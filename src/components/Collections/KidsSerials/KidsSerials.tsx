@@ -4,6 +4,7 @@ import {Playlist} from '../../Views/Playlist/Playlist';
 import {serialIds} from '../../../modules/kidsSerials/kidsSerials.constants';
 import {IKidsSerial} from '../../../modules/kidsSerial/kidsSerial.actions';
 import {IVideos} from '../../../modules/videos/videos.actions';
+import {kidsSerialsStubs} from '../../../images/kidsSerials/';
 
 interface IProps {
   kidsSerial: IKidsSerial;
@@ -15,32 +16,32 @@ export class CollectionKidsSerials extends React.PureComponent<IProps> {
   private getImageSrc = (serialId: number) => {
     switch (serialId) {
       case 150:
-        return 'https://smotri.mail.ru/assets/65b2055709c41da63193475f2ac589a6.png';
+        return kidsSerialsStubs.fiksiki;
         break;
       case 83:
-        return 'https://smotri.mail.ru/assets/b78e953e48482fe35468b83d5517251a.png';
+        return kidsSerialsStubs.smeshariki;
         break;
       case 149:
       case 117:
-        return 'https://smotri.mail.ru/assets/b70393c7394a526435ea419e4ae9b780.png';
+        return kidsSerialsStubs.belkaIstrelka;
         break;
       case 74:
-        return 'https://smotri.mail.ru/assets/728f65e54412b98a41af768ff9ed3ab4.png';
+        return kidsSerialsStubs.drakoshaTosha;
         break;
       case 71:
-        return 'https://smotri.mail.ru/assets/e449102d24e5e8e225214be488578713.png';
+        return kidsSerialsStubs.planeta;
         break;
       case 110:
-        return 'https://smotri.mail.ru/assets/ae7a7b63ecae9a3f4b657e03c5a91adf.png';
+        return kidsSerialsStubs.pororo;
         break;
       case 84:
-        return 'https://smotri.mail.ru/assets/8e4fd77cd4b08d8c4a9aaf2b1a24a14e.png';
+        return kidsSerialsStubs.timaItoma;
         break;
       case 111:
-        return 'https://smotri.mail.ru/assets/10125cc42fc8adbdc5c6ebeb6ad7205c.png';
+        return kidsSerialsStubs.chupi;
         break;
       default:
-        return 'https://smotri.mail.ru/assets/b78e953e48482fe35468b83d5517251a.png';
+        return kidsSerialsStubs.smeshariki;
         break;
     }
   };
@@ -56,7 +57,12 @@ export class CollectionKidsSerials extends React.PureComponent<IProps> {
       if (!kidsSerial[serialId]) {
         return null;
       }
+
       const serialVideos = kidsSerial[serialId].videos.map((id) => videos[id]);
+
+      if (!serialVideos || serialVideos.length === 0) {
+        return null;
+      }
 
       const playVideoKidsSeries = (videoId: number) => {
         return playVideo(kidsSerial[serialId].videos)(videoId);

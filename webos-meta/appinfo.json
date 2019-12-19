@@ -5,9 +5,9 @@
   "type": "web",
   "main": "index.html",
   "title": "Smotri",
-  "icon": "icon.png",
-  "miniicon": "icon-mini.png",
-  "largeIcon": "icon-large.png",
+  "icon": "favicon-32x32.png",
+  "miniicon": "favicon-32x32.png",
+  "largeIcon": "favicon-32x32.png",
   "uiRevision": 2,
   "disableBackHistoryAPI": true
 }

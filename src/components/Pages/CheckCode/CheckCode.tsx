@@ -1,10 +1,17 @@
 import React from 'react';
 import {connect} from 'react-redux';
-
 import {Layout, Cell} from '@enact/ui/Layout';
-import {Wrapper, NumberButton, NumberButtonCheck} from './CheckCodeStyles';
+
+import {
+  Wrapper,
+  NumberButton,
+  NumberButtonCheck,
+  ErrorMessage,
+  EnterNumber,
+} from './CheckCodeStyles';
 import {NumberHelper} from '../../../utils/number';
 import {setCodeChecked} from '../../../modules/parentSettings/parentSettings.actions';
+import {colors} from '../../../styles/Colors';
 
 interface IDispatchProps {
   setCodeChecked: typeof setCodeChecked;
@@ -16,6 +23,7 @@ interface IState {
   inputNumbers: number[];
   showInputNumbers: number[];
   numberAnswers: number[];
+  wrongAnswer: boolean;
 }
 
 const numbers = [
@@ -38,6 +46,7 @@ class CheckCodeComponent extends React.PureComponent<IProps> {
     inputNumbers: [],
     showInputNumbers: [],
     numberAnswers: [],
+    wrongAnswer: false,
   };
 
   public componentDidMount() {
@@ -51,10 +60,16 @@ class CheckCodeComponent extends React.PureComponent<IProps> {
     const {setCodeChecked} = this.props;
     const {inputNumbers, numberAnswers} = this.state;
 
+    if (inputNumbers.length < this.codeLength) {
+      return;
+    }
+
     if (
       numberAnswers.every((number, index) => number === inputNumbers[index])
     ) {
       setCodeChecked(true);
+    } else {
+      this.setState({wrongAnswer: true});
     }
   }
 
@@ -69,18 +84,28 @@ class CheckCodeComponent extends React.PureComponent<IProps> {
   };
 
   private clickNumber = (event) => {
-    const {inputNumbers, showInputNumbers} = this.state;
+    const {inputNumbers, showInputNumbers, wrongAnswer} = this.state;
 
-    if (!event || !event.target || inputNumbers.length >= this.codeLength) {
+    if (!event || !event.target) {
+      return;
+    }
+
+    const value = event.target.getAttribute('value');
+    const dataNumeric = event.target.getAttribute('data-numeric');
+
+    if (wrongAnswer) {
+      this.setState({
+        wrongAnswer: false,
+        inputNumbers: [value],
+        showInputNumbers: [dataNumeric],
+      });
+
       return;
     }
 
     this.setState({
-      inputNumbers: [...inputNumbers, event.target.getAttribute('value')],
-      showInputNumbers: [
-        ...showInputNumbers,
-        event.target.getAttribute('data-numeric'),
-      ],
+      inputNumbers: [...inputNumbers, value],
+      showInputNumbers: [...showInputNumbers, dataNumeric],
     });
   };
 
@@ -103,22 +128,39 @@ class CheckCodeComponent extends React.PureComponent<IProps> {
   };
 
   render() {
-    const {showInputNumbers, numberAnswers} = this.state;
+    const {showInputNumbers, numberAnswers, wrongAnswer} = this.state;
+
+    const borderColorAnswer = wrongAnswer ? colors.red100 : null;
 
     return (
       <Wrapper>
         <Layout className="layout">
-          <Cell shrink>Введите цифры: {numberAnswers.join(', ')}</Cell>
+          <Cell shrink>
+            <EnterNumber>
+              Для доступа к настройкам введите цифры: {numberAnswers.join(', ')}
+            </EnterNumber>
+          </Cell>
         </Layout>
         <Layout className="layout">
           <Cell shrink>
-            <NumberButtonCheck>{showInputNumbers[0]}</NumberButtonCheck>
+            <ErrorMessage>{wrongAnswer && 'Неверный код'}</ErrorMessage>
+          </Cell>
+        </Layout>
+        <Layout className="layout">
+          <Cell shrink>
+            <NumberButtonCheck bordercolor={borderColorAnswer}>
+              {showInputNumbers[0]}
+            </NumberButtonCheck>
           </Cell>
           <Cell shrink>
-            <NumberButtonCheck>{showInputNumbers[1]}</NumberButtonCheck>
+            <NumberButtonCheck bordercolor={borderColorAnswer}>
+              {showInputNumbers[1]}
+            </NumberButtonCheck>
           </Cell>
           <Cell shrink>
-            <NumberButtonCheck>{showInputNumbers[2]}</NumberButtonCheck>
+            <NumberButtonCheck bordercolor={borderColorAnswer}>
+              {showInputNumbers[2]}
+            </NumberButtonCheck>
           </Cell>
         </Layout>
         <Layout className="layout">
