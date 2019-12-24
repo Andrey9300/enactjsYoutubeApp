@@ -52,7 +52,7 @@ export async function axiosRequest<T = unknown>({
     endpoint,
     version,
   });
-  const baseURL = 'http://pulsar.mail.cloud.devmail.ru'; // pulsarback.mail.ru
+  const baseURL = 'https://pulsarback.mail.ru'; // pulsarback.mail.ru
   const reducedParams = Object.entries(params).reduce((acc, [key, value]) => {
     if (value != null && value !== '') {
       return {...acc, [key]: value};

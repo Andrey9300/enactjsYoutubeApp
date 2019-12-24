@@ -16,6 +16,7 @@ export enum EPathNames {
   KIDS = 'Дети',
   PARENT_CONTROL = 'Родительский контроль',
   CHECK_CODE = 'Проверка кода',
+  WAITING_PARENT_CONTROL = 'Ожидание родительского контроля',
 }
 
 interface IDispatchProps {
@@ -72,6 +73,8 @@ class RoutesComponent extends React.PureComponent<IProps> {
         break;
       case EPathNames.CHECK_CODE:
         setRoute('checkCode');
+      case EPathNames.WAITING_PARENT_CONTROL:
+        setRoute('waitingParentControl');
         break;
     }
   };

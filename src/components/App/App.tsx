@@ -21,6 +21,7 @@ import {Kids} from '../Pages/Kids/Kids';
 import {WindowHelper} from '../../utils/window';
 import {ParentControl} from '../Pages/ParentControl/ParentControl';
 import {CheckCode} from '../Pages/CheckCode/CheckCode';
+import {WaitingParentControl} from '../Pages/WaitingParentControl/WaitingParentControl';
 
 const RoutablePanels = Routable({navigate: 'onBack'}, Panels);
 
@@ -83,6 +84,10 @@ class AppComponent extends React.PureComponent<IProps> {
                 <Route path="kids" component={Kids} />
                 <Route path="parentControl" component={ParentControl} />
                 <Route path="checkCode" component={CheckCode} />
+                <Route
+                  path="waitingParentControl"
+                  component={WaitingParentControl}
+                />
               </RoutablePanels>
             </Cell>
           </Column>

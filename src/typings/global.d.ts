@@ -108,6 +108,4 @@ declare module '*.less' {
 
 declare module 'uuid';
 
-declare module 'lodash.throttle';
-
 declare module 'redux-saga-testing';

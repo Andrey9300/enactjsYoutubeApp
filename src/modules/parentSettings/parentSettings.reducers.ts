@@ -1,6 +1,6 @@
 import {combineReducers, Reducer} from 'redux';
 
-import {EParentSettings} from './parentSettings.constants';
+import {EParentSettings, isInfinite} from './parentSettings.constants';
 import {IParentSettings} from './parentSettings.actions';
 import {persistedState} from '../../store/configureStore';
 
@@ -15,7 +15,12 @@ export const getInitialParentSettingsState = (persistedState) => {
     !persistedState.state.parentSettingsReducer ||
     !persistedState.state.parentSettingsReducer.parentSettings
   ) {
-    return {age: 8, timer: 120};
+    return {
+      age: 8,
+      timer: isInfinite,
+      timerStartTimestamp: null,
+      waitingParentControl: false,
+    };
   } else {
     return persistedState.state.parentSettingsReducer.parentSettings;
   }

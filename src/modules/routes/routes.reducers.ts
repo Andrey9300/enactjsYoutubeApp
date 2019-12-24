@@ -1,11 +1,11 @@
-import {combineReducers, Reducer, AnyAction} from 'redux';
+import {combineReducers, Reducer} from 'redux';
 
 import {ERoutes} from './routes.constants';
 
 export type TRoutesAction = TypedAction<typeof import('./routes.actions')>;
 
 export const route: Reducer<string, TRoutesAction> = (
-  state = 'kids', // поменять
+  state = 'kids',
   action,
 ) => {
   switch (action.type) {
@@ -17,7 +17,10 @@ export const route: Reducer<string, TRoutesAction> = (
   }
 };
 
-export const showMenu: Reducer<boolean, AnyAction> = (state = true, action) => {
+export const showMenu: Reducer<boolean, TRoutesAction> = (
+  state = true,
+  action,
+) => {
   switch (action.type) {
     case ERoutes.SET_SHOW_MENU: {
       return action.payload;

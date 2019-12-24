@@ -4,10 +4,11 @@
   "vendor": "LGE-SVL",
   "type": "web",
   "main": "index.html",
-  "title": "Smotri",
-  "icon": "favicon-32x32.png",
-  "miniicon": "favicon-32x32.png",
-  "largeIcon": "favicon-32x32.png",
+  "title": "Смотри.Дети",
+  "icon": "favicon-mini.png",
+  "miniicon": "favicon-middle.png",
+  "largeIcon": "favicon-large.png",
+  "splashBackground": "splashBackground.png",
   "uiRevision": 2,
   "disableBackHistoryAPI": true
 }

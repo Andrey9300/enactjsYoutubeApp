@@ -14,9 +14,9 @@ import {
   IParentSettings,
   setParentSettings,
 } from '../../../modules/parentSettings/parentSettings.actions';
-import BackArrow from '../../Icons/BackArrow/BackArrow.svg';
 import {SubmitButton} from '../../UiElements/SubmitButton/SubmitButton';
 import {setRoute} from '../../../modules/routes/routes.actions';
+import {isInfinite} from '../../../modules/parentSettings/parentSettings.constants';
 
 interface IStateProps {
   parentSettings: IParentSettings;
@@ -71,13 +71,23 @@ export class ParentControlComponent extends React.PureComponent<IProps> {
   private saveSettings = () => {
     const {setParentSettings, setRoute} = this.props;
     const {age, timer} = this.state;
+    let timerStartTimestamp = null;
 
-    setParentSettings({age, timer});
+    if (timer !== isInfinite) {
+      timerStartTimestamp = Date.now();
+    }
+
+    setParentSettings({age, timer, timerStartTimestamp});
     setRoute('kids');
   };
 
   render() {
     const {age, timer} = this.state;
+    let timerValue: number | string = timer;
+
+    if (timer === isInfinite) {
+      timerValue = '∞';
+    }
 
     return (
       <Panel>
@@ -100,7 +110,7 @@ export class ParentControlComponent extends React.PureComponent<IProps> {
             />
           </WrapperControls>
           <WrapperControls>
-            <Timer>Таймер {timer} минут</Timer>
+            <Timer>Таймер {timerValue} минут</Timer>
             <WrapperIncrementSlider
               onChange={this.changeTimer}
               decrementIcon="minus"
@@ -108,7 +118,7 @@ export class ParentControlComponent extends React.PureComponent<IProps> {
               incrementIcon="plus"
               knobStep={5}
               min={5}
-              max={120}
+              max={125}
               step={5}
             />
           </WrapperControls>

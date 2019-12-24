@@ -9,6 +9,7 @@ export type TRoutes =
   | 'channels'
   | 'kids'
   | 'parentControl'
+  | 'waitingParentControl'
   | 'checkCode';
 
 export const setRoute = (payload: TRoutes) =>
